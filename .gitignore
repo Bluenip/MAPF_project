@@ -1,5 +1,4 @@
 __pycache__/
 *.pyc
-code of paper/
 .venv/
 .DS_Store

@@ -169,7 +169,8 @@ code/
 ├── benchmark.py        # Đo 1 warm-up + 30 lần, in bảng kết quả dùng trên slide
 ├── results/benchmark_output.txt  # Output benchmark dùng cho slide
 ├── test_algorithms.py  # Bộ 48 bài kiểm thử đơn vị tự động (unittest)
-└── README.md           # Tài liệu kỹ thuật chi tiết
+├── README.md           # Tài liệu kỹ thuật chi tiết
+└── code of paper/      # Cài lại BCP (Lam et al., IJCAI 2019) bằng Python – slide 26–30, 37
 ```
 
 ### Các Hàm Chính
@@ -219,6 +220,18 @@ python3 demo.py --scenario bay --steps
 # Chỉ chạy kịch bản kho hàng 10x10
 python3 demo.py --scenario warehouse --steps
 ```
+
+### 7.5. Phần BCP (`code of paper/`, slide 37)
+Phần này cần thư viện ngoài (`highspy`, `numpy`), xem chi tiết trong `code of paper/README.md`:
+```bash
+cd "code of paper"
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+.venv/bin/python test_bcp.py 60   # mong đợi: 60/60 instance khớp với bộ giải vét cạn
+```
+
+### 7.6. Tính tái lập
+- Phần 2 robot (thư mục gốc) **không dùng hàm ngẫu nhiên**; makespan, số bước, số trạng thái mở luôn giống nhau mỗi lần chạy. Chỉ runtime (ms) dao động theo máy.
+- Phần BCP có dùng `random` nhưng **luôn với seed cố định** (giải thích ngay trong code: `test_bcp.py`, `bcp_mapf.py`, `generate_dataset.py`), nên kết quả tái lập được.
 
 ---
 
