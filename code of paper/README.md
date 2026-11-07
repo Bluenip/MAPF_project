@@ -6,7 +6,7 @@ Cài đặt lại bằng Python bài báo
 
 kèm một bộ dữ liệu **mô phỏng theo thiết lập thí nghiệm** của paper (mục 5.1). Paper không công bố file dataset, nên bộ này **không giống** bộ của paper (xem mục "Bộ dữ liệu" bên dưới).
 
-**Mọi số liệu về BCP trên slide (slide 28, 30, 31, 37) là kết quả công bố trong paper**, không phải do code này chạy ra.
+**Mọi số liệu về BCP trên slide (slide 28, 30, 31 và bảng ở slide 37) là kết quả công bố trong paper**, không phải do code này chạy ra. Ngoại lệ duy nhất: kết quả `60/60` (slide 35, 37) do `test_bcp.py` chạy ra.
 Code chính thức của tác giả (C++, SCIP + CPLEX/Gurobi): https://github.com/ed-lam/bcp-mapf
 
 ## Cấu trúc thư mục
@@ -23,7 +23,7 @@ Code chính thức của tác giả (C++, SCIP + CPLEX/Gurobi): https://github.c
 | `dataset/original_li2019/` | File gốc tải từ repo CBSH2 của Li et al. (lak503d, 100 agent) |
 | `requirements.txt` | Phiên bản thư viện đã dùng (`highspy`, `numpy`, `matplotlib`) |
 
-## Tái lập kết quả trên slide (slide 37)
+## Tái lập kết quả trên slide (slide 35, 37)
 
 Slide chỉ báo cáo **một** kết quả của phần này: *BCP và BCP-B khớp với bộ giải vét cạn trên 60 instance nhỏ*.
 Các bảng số liệu về BCP trên slide 28 và 30 là **kết quả công bố trong paper**, không phải do code này chạy ra.

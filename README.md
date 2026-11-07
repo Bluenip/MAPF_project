@@ -114,7 +114,7 @@ Phương pháp A* độc lập kết hợp lập lịch trên tiến trình cố
 ```
       0   1   2   3   4
  0  [ # ] [ # ] [ . ] [ # ] [ # ]   <-- Ô (2,0) là vịnh tránh xe
- 1  [ a ] [ . ] [ . ] [ . ] [ α ]   <-- Hành lang 1 làn duy nhất
+ 1  [ A ] [ . ] [ . ] [ . ] [ B ]   <-- Hành lang 1 làn duy nhất (A: start A = goal B; B: start B = goal A)
  2  [ # ] [ # ] [ . ] [ # ] [ # ]   <-- Ô (2,2) là vịnh tránh xe
 ```
 
@@ -160,7 +160,7 @@ Khi gọi `astar_independent()`, trường `stage_metrics` cung cấp chi tiết
 Toàn bộ mã nguồn nằm trong repo GitHub: https://github.com/Bluenip/MAPF_project
 
 ```
-code/
+MAPF_project/
 ├── common.py           # Tiện ích nền tảng: Grid, validation, metrics, định dạng lưới
 ├── bfs.py              # Cài đặt BFS không gian chung (BFS Joint)
 ├── astar.py            # Cài đặt A* độc lập & Lập lịch BFS hữu hạn
@@ -170,7 +170,7 @@ code/
 ├── results/benchmark_output.txt  # Output benchmark dùng cho slide
 ├── test_algorithms.py  # Bộ 48 bài kiểm thử đơn vị tự động (unittest)
 ├── README.md           # Tài liệu kỹ thuật chi tiết
-└── code of paper/      # Cài lại BCP (Lam et al., IJCAI 2019) bằng Python – slide 26–30, 37
+└── code of paper/      # Cài lại BCP (Lam et al., IJCAI 2019) bằng Python – slide 26–30, 35, 37
 ```
 
 ### Các Hàm Chính
@@ -221,7 +221,7 @@ python3 demo.py --scenario bay --steps
 python3 demo.py --scenario warehouse --steps
 ```
 
-### 7.5. Phần BCP (`code of paper/`, slide 37)
+### 7.5. Phần BCP (`code of paper/`, slide 26–30, 35, 37)
 Phần này cần thư viện ngoài (`highspy`, `numpy`), xem chi tiết trong `code of paper/README.md`:
 ```bash
 cd "code of paper"
