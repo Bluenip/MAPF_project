@@ -85,25 +85,25 @@ Quy trình gồm 2 giai đoạn:
 > **Ghi chú về khả năng tái lập (Reproducibility):**
 > - Mã nguồn **không dùng bất kỳ hàm ngẫu nhiên nào** (không có `random`, không có seed). Thứ tự duyệt hàng xóm cố định và hàng đợi ưu tiên của A* dùng bộ đếm `counter` để phá hoà (tie-breaking) theo thứ tự chèn, nên **Makespan, số bước di chuyển và số trạng thái mở luôn giống hệt nhau** ở mọi lần chạy, trên mọi máy.
 > - Riêng **thời gian chạy (ms)** là wall-clock đo bằng `time.perf_counter()`, sẽ dao động theo phần cứng và tải máy; các giá trị dưới đây chỉ mang tính tham khảo. Hãy so sánh dựa trên số trạng thái mở (cố định) thay vì con số ms tuyệt đối.
-> - Lệnh tái lập bảng: `python3 demo.py`.
+> - Lệnh tái lập bảng (1 warm-up + 30 lần đo, lấy trung vị — đúng quy trình trên slide 16): `python3 benchmark.py`. Kết quả lần chạy dùng cho slide được lưu tại `results/benchmark_output.txt` (Intel Core i5-12450HX, Python 3.14.9, Linux x86_64).
 
 #### Kịch Bản 1: Kho Hàng 10×10 (Start A=(0,0) → Goal A=(5,9); Start B=(4,0) → Goal B=(0,9))
 | Thuật toán | Makespan | Di chuyển A | Di chuyển B | Trạng thái mở | Thời gian chạy (ms) | Tính tối ưu |
 | :--- | :---: | :---: | :---: | :---: | :---: | :--- |
-| **BFS (Joint)** | **14** | 14 | 13 | 4,792 | ~51.13 ms | Tối ưu toàn cục |
+| **BFS (Joint)** | **14** | 14 | 13 | 4,792 | ~39.81 ms | Tối ưu toàn cục |
 | **A* Độc lập + Lập lịch** | 18 | 14 | 13 | 281 | **~0.27 ms** | Kém tối ưu (+4 bước đợi) |
-| **Joint A*** | **14** | 14 | 13 | **266** | **~2.84 ms** | Tối ưu toàn cục |
+| **Joint A*** | **14** | 14 | 13 | **266** | **~2.91 ms** | Tối ưu toàn cục |
 
 > **Phân tích chi tiết**:
-> - **Joint A* so với BFS**: Cùng đạt makespan tối ưu = 14, nhưng Joint A* chỉ mở **266 trạng thái** so với **4,792 trạng thái** của BFS (giảm khoảng **18 lần**); thời gian chạy theo đó cũng nhanh hơn khoảng **14–18 lần** tùy lần đo.
+> - **Joint A* so với BFS**: Cùng đạt makespan tối ưu = 14, nhưng Joint A* chỉ mở **266 trạng thái** so với **4,792 trạng thái** của BFS (giảm khoảng **18 lần**); thời gian chạy theo đó cũng nhanh hơn khoảng **13–18 lần** tùy lần đo.
 > - **A* Độc lập**: Mặc dù chạy nhanh nhất (0.27 ms), nhưng do hai đường đi ngắn nhất độc lập giao nhau trong kho hàng, bộ lập lịch phải chèn các bước đợi, khiến makespan tăng lên **18** (kém tối ưu so với 14 của Joint search).
 
 #### Kịch Bản 2: Hành Lang Hẹp Có Vịnh Tránh Xe 3×5 (Passing Bay)
 | Thuật toán | Makespan | Di chuyển A | Di chuyển B | Trạng thái mở | Thời gian chạy (ms) | Kết quả |
 | :--- | :---: | :---: | :---: | :---: | :---: | :--- |
-| **BFS (Joint)** | **6** | 6 | 4 | 42 | ~0.26 ms | Thành công (đi vòng qua vịnh) |
-| **A* Độc lập + Lập lịch** | **N/A** | N/A | N/A | 20 (5 + 5 + 10) | ~0.04 ms | **Thất bại (Không lập lịch được)** |
-| **Joint A*** | **6** | 6 | 4 | **22** | **~0.18 ms** | Thành công (đi vòng qua vịnh) |
+| **BFS (Joint)** | **6** | 6 | 4 | 42 | ~0.25 ms | Thành công (đi vòng qua vịnh) |
+| **A* Độc lập + Lập lịch** | **N/A** | N/A | N/A | 20 (5 + 5 + 10) | ~0.019 ms | **Thất bại (Không lập lịch được)** |
+| **Joint A*** | **6** | 6 | 4 | **22** | **~0.16 ms** | Thành công (đi vòng qua vịnh) |
 
 ---
 
@@ -166,6 +166,8 @@ code/
 ├── astar.py            # Cài đặt A* độc lập & Lập lịch BFS hữu hạn
 ├── joint_astar.py      # Cài đặt Joint A* với Heuristic Max Manhattan
 ├── demo.py             # Kịch bản so sánh trực quan và đo đạc thực nghiệm
+├── benchmark.py        # Đo 1 warm-up + 30 lần, in bảng kết quả dùng trên slide
+├── results/benchmark_output.txt  # Output benchmark dùng cho slide
 ├── test_algorithms.py  # Bộ 48 bài kiểm thử đơn vị tự động (unittest)
 └── README.md           # Tài liệu kỹ thuật chi tiết
 ```
@@ -200,7 +202,13 @@ Chạy cả hai kịch bản (Kho hàng 10×10 và Hành lang có vịnh tránh)
 python3 demo.py
 ```
 
-### 7.3. Xem Chi Tiết Từng Bước Di Chuyển Trên Bản Đồ (CLI Flag `--steps`)
+### 7.3. Tái Lập Bảng Kết Quả Trên Slide (Benchmark)
+```bash
+python3 benchmark.py
+```
+In ra Makespan, số bước di chuyển, số trạng thái mở (luôn giống nhau) và runtime trung vị của 30 lần đo (dao động theo máy).
+
+### 7.4. Xem Chi Tiết Từng Bước Di Chuyển Trên Bản Đồ (CLI Flag `--steps`)
 ```bash
 # Xem từng bước di chuyển của cả hai kịch bản
 python3 demo.py --steps
