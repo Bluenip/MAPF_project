@@ -1,4 +1,7 @@
-"""Chạy thí nghiệm như mục 5 của paper: tỉ lệ instance giải tối ưu và thời gian chạy theo bản đồ, số agent.
+"""Chạy thí nghiệm theo thiết lập mục 5 của paper: tỉ lệ instance giải tối ưu và thời gian chạy theo bản đồ, số agent.
+
+LƯU Ý: chạy trên bộ dữ liệu mô phỏng (xem generate_dataset.py), nên kết quả không so sánh trực tiếp
+được với Hình 3/Hình 4 của paper. Slide KHÔNG dùng kết quả của script này.
 
 Ví dụ:
   # toàn bộ 1.350 instance, cả hai biến thể, timeout 5 phút như paper (rất lâu!)

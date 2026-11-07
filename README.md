@@ -83,7 +83,7 @@ Quy trình gồm 2 giai đoạn:
 ### 3.2. Bảng Dữ Liệu Thực Nghiệm
 
 > **Ghi chú về khả năng tái lập (Reproducibility):**
-> - Mã nguồn **không dùng bất kỳ hàm ngẫu nhiên nào** (không có `random`, không có seed). Thứ tự duyệt hàng xóm cố định và hàng đợi ưu tiên của A* dùng bộ đếm `counter` để phá hoà (tie-breaking) theo thứ tự chèn, nên **Makespan, số bước di chuyển và số trạng thái mở luôn giống hệt nhau** ở mọi lần chạy, trên mọi máy.
+> - Mã nguồn phần 2 robot (các file ở thư mục gốc) **không dùng bất kỳ hàm ngẫu nhiên nào** (không có `random`, không có seed). Thứ tự duyệt hàng xóm cố định và hàng đợi ưu tiên của A* dùng bộ đếm `counter` để phá hoà (tie-breaking) theo thứ tự chèn, nên **Makespan, số bước di chuyển và số trạng thái mở luôn giống hệt nhau** ở mọi lần chạy, trên mọi máy.
 > - Riêng **thời gian chạy (ms)** là wall-clock đo bằng `time.perf_counter()`, sẽ dao động theo phần cứng và tải máy; các giá trị dưới đây chỉ mang tính tham khảo. Hãy so sánh dựa trên số trạng thái mở (cố định) thay vì con số ms tuyệt đối.
 > - Lệnh tái lập bảng (1 warm-up + 30 lần đo, lấy trung vị — đúng quy trình trên slide 16): `python3 benchmark.py`. Kết quả lần chạy dùng cho slide được lưu tại `results/benchmark_output.txt` (Intel Core i5-12450HX, Python 3.14.9, Linux x86_64).
 

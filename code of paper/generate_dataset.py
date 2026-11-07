@@ -1,4 +1,7 @@
-"""Dựng lại bộ dữ liệu thí nghiệm của Lam et al. (IJCAI 2019), mục 5.1.
+"""Sinh bộ dữ liệu MÔ PHỎNG theo thiết lập thí nghiệm của Lam et al. (IJCAI 2019), mục 5.1.
+
+LƯU Ý: đây KHÔNG phải bộ dữ liệu của paper (paper không công bố file). Chỉ giống paper ở
+bản đồ, số agent và số instance; chỉ 50 instance (lak503d, 100 agent) là bản gốc.
 
 Paper dùng "cùng bộ instance với [Li et al., AAAI 2019]": 1.350 instance trên 4 bản đồ,
 50 instance cho mỗi số agent. Tác giả không công bố trọn bộ, nên script này:

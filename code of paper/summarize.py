@@ -1,4 +1,5 @@
-"""Gộp kết quả các shard và tạo bảng + biểu đồ tương tự Hình 3 và Hình 4 của paper.
+"""Gộp kết quả các shard và tạo bảng + biểu đồ có dạng giống Hình 3 và Hình 4 của paper
+(trên bộ dữ liệu mô phỏng, nên số liệu không so sánh trực tiếp được với paper).
 
 Chạy:  .venv/bin/python summarize.py
 Đầu ra: results/results_all.csv, results/summary.md, results/fig3_success_rate.png, results/fig4_runtime.png
@@ -40,7 +41,7 @@ def main():
     by = {(r["map"], int(r["agents"]), int(r["instance"]), r["solver"]): r for r in rows}
     total = sum(len(v) for v in AGENT_COUNTS.values()) * N_INSTANCES
     bad = [r for r in rows if r["valid"] == "NO"]
-    lines = ["# Kết quả tái hiện Lam et al. (IJCAI 2019)", ""]
+    lines = ["# Kết quả chạy BCP/BCP-B trên bộ dữ liệu mô phỏng theo Lam et al. (IJCAI 2019)", ""]
     for s in SOLVERS:
         done = [r for r in rows if r["solver"] == s]
         opt = [r for r in done if r["status"] == "optimal"]
