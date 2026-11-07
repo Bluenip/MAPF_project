@@ -18,6 +18,7 @@ Code chính thức của tác giả (C++, SCIP + CPLEX/Gurobi): https://github.c
 | `generate_dataset.py` | Sinh bộ 1.350 instance mô phỏng theo thiết lập của paper (cùng bản đồ, số agent, số instance; chỉ 50 instance là bản gốc) |
 | `run_experiments.py` | Chạy thí nghiệm, ghi kết quả ra CSV |
 | `test_bcp.py` | Kiểm thử: so SOC tối ưu của BCP/BCP-B với bộ giải vét cạn |
+| `summarize.py` | Gộp kết quả trong `results/`, tạo bảng và biểu đồ dạng Hình 3, Hình 4 (không dùng cho slide) |
 | `dataset/maps/` | 4 bản đồ: `20x20`, `10obs-20x20`, `den520d`, `lak503d` |
 | `dataset/scenarios/<map>/` | `<map>-<k>agents-<i>.scen`, 50 instance cho mỗi số agent k |
 | `dataset/original_li2019/` | File gốc tải từ repo CBSH2 của Li et al. (lak503d, 100 agent) |
@@ -42,7 +43,7 @@ Kết quả mong đợi ở dòng cuối: `60/60 instance khớp với bộ gi�
 - `bcp_mapf.py`: `random.Random(0)` xáo thứ tự agent cho Prioritized Planning (chỉ để tìm cận trên ban đầu; không ảnh hưởng SOC tối ưu).
 - `generate_dataset.py`: `random.Random(2019)` cho bản đồ `10obs-20x20` và `random.Random("<map>-<k>")` cho từng cấu hình. Chạy lại script sẽ sinh ra đúng thư mục `dataset/` **đang có trong repo này**, giống hệt từng byte (không phải dataset của paper, vì paper không công bố).
 
-Repo không kèm kết quả benchmark nào chạy bằng code này: slide không dùng các kết quả đó, và chúng không so sánh trực tiếp được với paper vì dataset khác nhau. Nếu chạy `run_experiments.py`, kết quả sẽ được ghi vào `results/` (đã có trong `.gitignore`). Thời gian chạy phụ thuộc máy.
+Repo không kèm kết quả benchmark nào chạy bằng code này: slide không dùng các kết quả đó, và chúng không so sánh trực tiếp được với paper vì dataset khác nhau. Nếu chạy `run_experiments.py` hoặc `summarize.py`, kết quả sẽ được ghi vào `results/` (đã có trong `.gitignore`, thư mục tự được tạo). Thời gian chạy phụ thuộc máy.
 
 ## Cài đặt và chạy (đầy đủ)
 
@@ -60,7 +61,7 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 ```
 
 Kết quả được ghi vào `results/results.csv`, mỗi instance một dòng. Script tự bỏ qua các instance đã chạy, nên có thể dừng giữa chừng rồi chạy tiếp.
-Các cột chính: `status` (optimal/timeout), `soc`, `lb` (cận dưới), `root_lb` (cận dưới tại nút gốc), `time`, `nodes`, số lát cắt từng loại, và `valid` (lời giải đã qua validator).
+Các cột chính: `status` (optimal/timeout/infeasible), `soc`, `lb` (cận dưới), `root_lb` (cận dưới tại nút gốc), `time`, `nodes`, số lát cắt từng loại, và `valid` (lời giải đã qua validator).
 
 ## Ánh xạ paper → code
 
