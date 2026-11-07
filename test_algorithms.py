@@ -1,8 +1,9 @@
 """
 test_algorithms.py – Bộ kiểm thử cho ba thuật toán định tuyến hai robot.
 
-Chạy: python -m unittest test_algorithms -v
-Hoặc: python test_algorithms.py
+Chạy: python3 -m unittest test_algorithms -v
+Hoặc: python3 test_algorithms.py
+Tổng cộng 48 bài kiểm thử (slide 16).
 
 Các nhóm kiểm thử:
 - TestValidation: kiểm tra đầu vào không hợp lệ.
@@ -16,29 +17,27 @@ Các nhóm kiểm thử:
 - TestPathValidator: kiểm tra bộ xác thực đường đi.
 - TestUnschedulableIndependent: đường đi cố định không phối hợp được
   nhưng joint search có thể giải.
+- TestCountActualMoves, TestManhattanDistance, TestMakespanHeuristic:
+  các hàm tiện ích trong common.py.
 """
 
 from __future__ import annotations
 
-import sys
 import unittest
-from typing import List, Optional
+from typing import List
 
 from common import (
     Grid,
     JointState,
-    Position,
     count_actual_moves,
     has_edge_swap_conflict,
-    has_vertex_conflict,
     manhattan_distance,
     makespan_heuristic,
-    validate_inputs,
     validate_joint_path,
     validate_individual_paths,
 )
 from bfs import bfs_joint
-from astar import astar_independent, single_agent_astar, coordinate_paths
+from astar import astar_independent, single_agent_astar
 from joint_astar import joint_astar
 
 

@@ -21,9 +21,7 @@ from typing import Any, Dict, List, Optional, Tuple
 
 from common import (
     DIRECTIONS,
-    Grid,
     JointState,
-    Metrics,
     Position,
     compute_metrics,
     has_edge_swap_conflict,

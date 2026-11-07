@@ -14,7 +14,6 @@ Hướng di chuyển: Lên, Xuống, Trái, Phải, Đợi.
 
 from __future__ import annotations
 
-import time
 from typing import (
     Any,
     Dict,
@@ -22,7 +21,6 @@ from typing import (
     NamedTuple,
     Optional,
     Sequence,
-    Set,
     Tuple,
 )
 
@@ -425,13 +423,13 @@ def format_grid(
     Ký hiệu:
         .  = ô trống
         #  = chướng ngại vật
-        A  = Robot A (hoặc vị trí hiện tại)
-        B  = Robot B
-        X  = Cả hai robot (xung đột!)
-        Sa = Điểm bắt đầu Robot A
-        Ga = Điểm đích Robot A
-        Sb = Điểm bắt đầu Robot B
-        Gb = Điểm đích Robot B
+        A  = vị trí hiện tại của Robot A (tại bước `step`)
+        B  = vị trí hiện tại của Robot B
+        X  = cả hai robot cùng một ô (xung đột!)
+        a  = điểm bắt đầu Robot A,  α = điểm đích Robot A
+        b  = điểm bắt đầu Robot B,  β = điểm đích Robot B
+        Khi một ô vừa là điểm bắt đầu vừa là điểm đích, ưu tiên hiển thị theo
+        thứ tự a, α, b, β.
     """
     g = Grid(grid)
     # Xác định vị trí hiện tại của robot

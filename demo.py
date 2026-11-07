@@ -28,15 +28,11 @@ Tính tái lập (Reproducibility):
 from __future__ import annotations
 
 import argparse
-import sys
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List
 
 from common import (
-    Grid,
-    JointState,
     Metrics,
     Position,
-    count_actual_moves,
     format_grid,
     print_path_steps,
     validate_joint_path,
@@ -177,7 +173,7 @@ def print_stage_metrics(result: Dict[str, Any]) -> None:
 
 def run_scenario_warehouse(show_steps: bool = False) -> None:
     """Kịch bản 1: Kho hàng 10x10 tiêu chuẩn.
-    
+
     Chọn điểm xuất phát và đích sao cho cả 3 thuật toán đều thành công,
     thể hiện rõ sự tối ưu của BFS / Joint A* so với A* độc lập.
     """
@@ -215,7 +211,7 @@ def run_scenario_warehouse(show_steps: bool = False) -> None:
             grid, res_bfs["joint_path"], start_a, goal_a, start_b, goal_b
         )
         print(f"   ✔ Thành công! Makespan = {res_bfs['metrics'].makespan} (Tối ưu toàn cục).")
-        print(f"   ✔ Kế hoạch đã qua kiểm tra hợp lệ (không xung đột đỉnh/cạnh).")
+        print("   ✔ Kế hoạch đã qua kiểm tra hợp lệ (không xung đột đỉnh/cạnh).")
     else:
         print("   ✖ Không tìm thấy lời giải.")
 
@@ -229,7 +225,7 @@ def run_scenario_warehouse(show_steps: bool = False) -> None:
             grid, res_ind["joint_path"], start_a, goal_a, start_b, goal_b
         )
         print(f"   ✔ Thành công! Makespan = {res_ind['metrics'].makespan}.")
-        print(f"   ✔ Kế hoạch đã qua kiểm tra hợp lệ (không xung đột đỉnh/cạnh).")
+        print("   ✔ Kế hoạch đã qua kiểm tra hợp lệ (không xung đột đỉnh/cạnh).")
         print_stage_metrics(res_ind)
     else:
         print("   ✖ Không thể phối hợp các đường đi cố định.")
@@ -244,7 +240,7 @@ def run_scenario_warehouse(show_steps: bool = False) -> None:
             grid, res_joint["joint_path"], start_a, goal_a, start_b, goal_b
         )
         print(f"   ✔ Thành công! Makespan = {res_joint['metrics'].makespan} (Tối ưu toàn cục).")
-        print(f"   ✔ Kế hoạch đã qua kiểm tra hợp lệ (không xung đột đỉnh/cạnh).")
+        print("   ✔ Kế hoạch đã qua kiểm tra hợp lệ (không xung đột đỉnh/cạnh).")
     else:
         print("   ✖ Không tìm thấy lời giải.")
 

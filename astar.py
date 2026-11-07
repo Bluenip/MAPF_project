@@ -7,8 +7,8 @@ Thuật toán:
    (i, j) – chỉ số tiến trình trên đường đi cố định – để chèn
    các bước đợi tối ưu.
 
-KHÔNG sử dụng phương pháp chèn đợi vô hạn kiểu greedy từ PDF.
-Sử dụng BFS trên không gian (i, j) hữu hạn.
+Không chèn bước đợi theo kiểu tham lam (greedy) không giới hạn như báo cáo nhóm 4 khoá trước;
+thay vào đó dùng BFS trên không gian chỉ số (i, j) hữu hạn.
 
 KHÔNG có đảm bảo tối ưu toàn cục – thuật toán chỉ tối ưu trên
 đường đi cố định. Nếu phối hợp thất bại, có thể vẫn tồn tại
@@ -26,10 +26,8 @@ from common import (
     DIRECTIONS,
     Grid,
     JointState,
-    Metrics,
     Position,
     compute_metrics,
-    count_actual_moves,
     has_edge_swap_conflict,
     has_vertex_conflict,
     manhattan_distance,
@@ -195,15 +193,7 @@ def coordinate_paths(
             successors.append((i + 1, j))       # A tiến, B đợi
         if can_advance_b:
             successors.append((i, j + 1))       # A đợi, B tiến
-        # Khi cả hai đã ở cuối, không có chuyển tiếp → sẽ thoát vòng lặp
-
-        # Trường hợp một robot đã ở cuối, robot kia tiến
-        if not can_advance_a and can_advance_b:
-            # A đợi tại đích, B tiến
-            pass  # Đã thêm (i, j+1) ở trên
-        if can_advance_a and not can_advance_b:
-            # B đợi tại đích, A tiến
-            pass  # Đã thêm (i+1, j) ở trên
+        # Robot đã ở cuối đường đi thì đứng đợi tại đích (chỉ robot còn lại tiến).
 
         for ni, nj in successors:
             # Vị trí thực tế sau chuyển tiếp

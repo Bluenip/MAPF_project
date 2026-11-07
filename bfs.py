@@ -14,13 +14,11 @@ from __future__ import annotations
 import time
 from collections import deque
 from itertools import product
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional
 
 from common import (
     DIRECTIONS,
-    Grid,
     JointState,
-    Metrics,
     Position,
     compute_metrics,
     has_edge_swap_conflict,
@@ -140,5 +138,4 @@ def bfs_joint(
                 queue.append(successor)
 
     # Không tìm thấy lời giải
-    runtime = time.perf_counter() - t_start
     return None

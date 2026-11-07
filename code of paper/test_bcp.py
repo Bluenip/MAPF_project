@@ -1,7 +1,7 @@
 """Kiểm thử tính đúng đắn: so SOC tối ưu của BCP và BCP-B với một bộ giải vét cạn
 (Dijkstra trên không gian trạng thái chung) trên các instance nhỏ ngẫu nhiên.
 
-Chạy:  .venv/bin/python test_bcp.py [số_instance]
+Chạy:  .venv/bin/python test_bcp.py [số_instance]   (mặc định 60, như slide 35 và 37)
 """
 import heapq
 import random

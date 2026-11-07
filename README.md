@@ -207,7 +207,7 @@ python3 demo.py
 ```bash
 python3 benchmark.py
 ```
-In ra Makespan, số bước di chuyển, số trạng thái mở (luôn giống nhau) và runtime trung vị của 30 lần đo (dao động theo máy).
+In ra Makespan, số bước di chuyển, số trạng thái mở (luôn giống nhau) và runtime trung vị của 30 lần đo (dao động theo máy). Mọi kế hoạch tìm được đều được kiểm tra bằng `validate_joint_path` (đúng đích, chỉ đi sang ô kề hoặc đợi, không ra ngoài biên, không vào kệ hàng, không va chạm), ngoài phần đo thời gian.
 
 ### 7.4. Xem Chi Tiết Từng Bước Di Chuyển Trên Bản Đồ (CLI Flag `--steps`)
 ```bash

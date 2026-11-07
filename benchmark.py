@@ -5,6 +5,7 @@ benchmark.py – Tái lập bảng kết quả trên slide 18 và 23.
 Quy trình đo (giống mô tả ở slide 16 "Experimental Setup"):
 - Mỗi thuật toán chạy 1 lần khởi động (warm-up, không tính), sau đó 30 lần đo.
 - Runtime lấy từ chính thuật toán (time.perf_counter), KHÔNG tính bước validate_inputs.
+- Mọi kế hoạch tìm được đều được kiểm tra bằng validate_joint_path (ngoài phần đo thời gian).
 - Báo cáo trung vị (median): sắp xếp 30 giá trị, lấy trung bình giá trị thứ 15 và 16.
 
 Tính tái lập:
@@ -27,6 +28,7 @@ from typing import Any, Callable, Dict, List
 
 from astar import astar_independent
 from bfs import bfs_joint
+from common import validate_joint_path
 from demo import create_passing_bay_grid, create_warehouse_grid
 from joint_astar import joint_astar
 
@@ -48,6 +50,10 @@ def _run_once(fn: Callable[..., Any], name: str, grid, sa, ga, sb, gb) -> Dict[s
         res = fn(grid, sa, ga, sb, gb)
         if res is None:
             return {"ok": False, "T": None, "moves": None, "expanded": None, "runtime": None}
+    # Kiểm tra kế hoạch (đúng đích, mỗi bước đi sang ô kề hoặc đợi, không ra ngoài biên,
+    # không vào kệ hàng, không xung đột đỉnh/hoán đổi cạnh). Chạy SAU khi thuật toán đã đo
+    # thời gian xong, nên không ảnh hưởng runtime. Kế hoạch sai sẽ ném ValueError.
+    validate_joint_path(grid, res["joint_path"], sa, ga, sb, gb)
     m = res["metrics"]
     return {"ok": True, "T": m.makespan, "moves": (m.path_length_a, m.path_length_b),
             "expanded": m.expanded_states, "runtime": m.runtime_seconds}
