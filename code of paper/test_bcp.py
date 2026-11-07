@@ -91,7 +91,7 @@ def random_instance(rng, w, h, n_obs, k):
 
 
 def main():
-    n_tests = int(sys.argv[1]) if len(sys.argv) > 1 else 40
+    n_tests = int(sys.argv[1]) if len(sys.argv) > 1 else 60
     # Ngẫu nhiên có seed cố định (7): các instance kiểm thử (kích thước lưới, chướng ngại, start/goal)
     # được sinh ngẫu nhiên nhưng luôn giống hệt nhau mỗi lần chạy, nên kết quả "60/60" tái lập được.
     rng = random.Random(7)

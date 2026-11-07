@@ -95,7 +95,7 @@ Quy trình gồm 2 giai đoạn:
 | **Joint A*** | **14** | 14 | 13 | **266** | **~2.91 ms** | Tối ưu toàn cục |
 
 > **Phân tích chi tiết**:
-> - **Joint A* so với BFS**: Cùng đạt makespan tối ưu = 14, nhưng Joint A* chỉ mở **266 trạng thái** so với **4,792 trạng thái** của BFS (giảm khoảng **18 lần**); thời gian chạy theo đó cũng nhanh hơn khoảng **13–18 lần** tùy lần đo.
+> - **Joint A* so với BFS**: Cùng đạt makespan tối ưu = 14, nhưng Joint A* chỉ mở **266 trạng thái** so với **4,792 trạng thái** của BFS (giảm khoảng **18 lần**); thời gian chạy nhanh hơn khoảng **14 lần** (39.81 ms so với 2.91 ms; chỉ runtime phụ thuộc máy).
 > - **A* Độc lập**: Mặc dù chạy nhanh nhất (0.27 ms), nhưng do hai đường đi ngắn nhất độc lập giao nhau trong kho hàng, bộ lập lịch phải chèn các bước đợi, khiến makespan tăng lên **18** (kém tối ưu so với 14 của Joint search).
 
 #### Kịch Bản 2: Hành Lang Hẹp Có Vịnh Tránh Xe 3×5 (Passing Bay)
@@ -226,7 +226,7 @@ Phần này cần thư viện ngoài (`highspy`, `numpy`), xem chi tiết trong 
 ```bash
 cd "code of paper"
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-.venv/bin/python test_bcp.py 60   # mong đợi: 60/60 instance khớp với bộ giải vét cạn
+.venv/bin/python test_bcp.py      # mặc định 60 instance; mong đợi: 60/60 instance khớp với bộ giải vét cạn
 ```
 
 ### 7.6. Tính tái lập
